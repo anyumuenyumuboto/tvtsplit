@@ -1,0 +1,51 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tvtsplit"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "anyumuenyumuboto", email = "aebttkkktt@outlook.jp" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+    "polars",
+]
+
+[project.optional-dependencies]
+dev = [
+    "hatch",
+    "twine",
+]
+
+[dependency-groups]
+dev = [
+    "hatch",
+    "mypy>=1.14.1",
+    "pytest>=8.3.5",
+    "twine",
+]
+
+[project.urls]
+Documentation = "https://github.com/anyumuenyumuboto/tvtsplit#readme"
+Issues = "https://github.com/anyumuenyumuboto/tvtsplit/issues"
+Source = "https://github.com/anyumuenyumuboto/tvtsplit"
+
+[tool.hatch.version]
+path = "src/tvtsplit/__about__.py"

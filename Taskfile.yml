@@ -1,0 +1,35 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  install:
+    desc: "Installing packages using uv"
+    cmds:
+      - uv sync
+  check:
+    desc: "Lint python code"
+    cmds:
+      - ruff check --fix
+      - uv run mypy src/
+  format:
+    desc: "Format python code"
+    cmds:
+      - ruff format
+  test:
+    desc: "Test python code"
+    cmds:
+      - uv run pytest -v
+  build:
+    desc: "Build the tvtsplit package"
+    cmds:
+      - rm -rf dist/
+      - uv build
+  twine_check:
+    desc: "Package check"
+    cmds:
+      - uv run twine check dist/*
+  twine_upload_to_testpypi:
+    desc: "Upload built distributions to TestPyPI for verification"
+    cmds:
+      - uv run twine upload --repository testpypi dist/*
