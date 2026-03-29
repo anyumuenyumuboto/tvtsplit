@@ -1,5 +1,6 @@
 import polars as pl
 
+import tvtsplit
 
 
 def main():
@@ -15,12 +16,15 @@ def test_tvtsplit():
         schema=[("txt", pl.String)],
     )
 
-
-
     actual = sample_df.tvtsplit.train(params)["txt"].to_list()  # type: ignore[unresolved-attribute]
     expected = ["aaa", "bbb", "ccc", "ddd"]
 
     assert actual == expected
+
+
+# I put a dummy function because the formatter deletes "import tvtsplit".
+def dummy():
+    tvtsplit()  # type: ignore[call-non-callable]
 
 
 if __name__ == "__main__":

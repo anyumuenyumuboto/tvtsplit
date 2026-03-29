@@ -45,7 +45,11 @@ class TVTsplit:
             params = {"shuffle": True, "seed": 0, "val_size": 0.25, "test_size": 0.25}
 
         df = (
-            self._df.select(pl.all().shuffle(seed=int(params["seed"]) if params["seed"] is not None else None))
+            self._df.select(
+                pl.all().shuffle(
+                    seed=int(params["seed"]) if params["seed"] is not None else None
+                )
+            )
             if params["shuffle"]
             else self._df
         )
@@ -62,7 +66,11 @@ class TVTsplit:
             params = {"shuffle": True, "seed": 0, "val_size": 0.25, "test_size": 0.25}
 
         df = (
-            self._df.select(pl.all().shuffle(seed=int(params["seed"]) if params["seed"] is not None else None))
+            self._df.select(
+                pl.all().shuffle(
+                    seed=int(params["seed"]) if params["seed"] is not None else None
+                )
+            )
             if params["shuffle"]
             else self._df
         )
@@ -82,7 +90,11 @@ class TVTsplit:
             params = {"shuffle": True, "seed": 0, "val_size": 0.25, "test_size": 0.25}
 
         df = (
-            self._df.select(pl.all().shuffle(seed=int(params["seed"]) if params["seed"] is not None else None))
+            self._df.select(
+                pl.all().shuffle(
+                    seed=int(params["seed"]) if params["seed"] is not None else None
+                )
+            )
             if params["shuffle"]
             else self._df
         )
