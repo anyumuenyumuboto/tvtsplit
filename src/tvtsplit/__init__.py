@@ -2,9 +2,6 @@
 #
 # SPDX-License-Identifier: MIT
 
-from tvtsplit import tvtsplit
+from tvtsplit.tvtsplit import TVTsplit
 
-
-# I put a dummy function because the formatter deletes import tvtsplit.
-def dummy():
-    tvtsplit()
+__all__ = ["TVTsplit"]

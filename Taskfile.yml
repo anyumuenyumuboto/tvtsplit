@@ -11,7 +11,7 @@ tasks:
     desc: "Lint python code"
     cmds:
       - ruff check --fix
-      - uv run mypy src/
+      - ty check
   format:
     desc: "Format python code"
     cmds:
