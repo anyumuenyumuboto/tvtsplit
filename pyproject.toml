@@ -37,7 +37,6 @@ dev = [
 [dependency-groups]
 dev = [
     "hatch",
-    "mypy>=1.14.1",
     "pytest>=8.3.5",
     "twine",
 ]

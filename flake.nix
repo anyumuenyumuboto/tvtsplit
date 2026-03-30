@@ -18,6 +18,7 @@
             pkgs.husky
             pkgs.python314
             pkgs.ruff
+            pkgs.ty
             pkgs.uv
           ];
         };

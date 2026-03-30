@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 import polars as pl
 
 
@@ -12,7 +14,7 @@ class TVTsplit:
         self._df = df
         self.df_length = df.select(pl.len()).item()
 
-    def train_length(self, params: dict[str, bool | float] = None) -> int:
+    def train_length(self, params: dict[str, Any] | None = None) -> int:
 
         if params is None:
             params = {"shuffle": True, "seed": 0, "val_size": 0.25, "test_size": 0.25}
@@ -23,27 +25,31 @@ class TVTsplit:
             - int(self.df_length * params["test_size"])
         )
 
-    def val_length(self, params: dict[str, bool | float] = None) -> int:
+    def val_length(self, params: dict[str, Any] | None = None) -> int:
 
         if params is None:
             params = {"shuffle": True, "seed": 0, "val_size": 0.25, "test_size": 0.25}
 
         return int(self.df_length * params["val_size"])
 
-    def test_length(self, params: dict[str, bool | float] = None) -> int:
+    def test_length(self, params: dict[str, Any] | None = None) -> int:
 
         if params is None:
             params = {"shuffle": True, "seed": 0, "val_size": 0.25, "test_size": 0.25}
 
-        return int(self.df_length * params["test_length"])
+        return int(self.df_length * params["test_size"])
 
-    def train(self, params: dict[str, bool | float] = None) -> pl.DataFrame:
+    def train(self, params: dict[str, Any] | None = None) -> pl.DataFrame:
 
         if params is None:
             params = {"shuffle": True, "seed": 0, "val_size": 0.25, "test_size": 0.25}
 
         df = (
-            self._df.select(pl.all().shuffle(seed=params["seed"]))
+            self._df.select(
+                pl.all().shuffle(
+                    seed=int(params["seed"]) if params["seed"] is not None else None
+                )
+            )
             if params["shuffle"]
             else self._df
         )
@@ -54,13 +60,17 @@ class TVTsplit:
             .drop("n")
         )
 
-    def val(self, params: dict[str, bool | float] = None) -> pl.DataFrame:
+    def val(self, params: dict[str, Any] | None = None) -> pl.DataFrame:
 
         if params is None:
             params = {"shuffle": True, "seed": 0, "val_size": 0.25, "test_size": 0.25}
 
         df = (
-            self._df.select(pl.all().shuffle(seed=params["seed"]))
+            self._df.select(
+                pl.all().shuffle(
+                    seed=int(params["seed"]) if params["seed"] is not None else None
+                )
+            )
             if params["shuffle"]
             else self._df
         )
@@ -74,13 +84,17 @@ class TVTsplit:
             .drop("n")
         )
 
-    def test(self, params: dict[str, bool | float] = None) -> pl.DataFrame:
+    def test(self, params: dict[str, Any] | None = None) -> pl.DataFrame:
 
         if params is None:
             params = {"shuffle": True, "seed": 0, "val_size": 0.25, "test_size": 0.25}
 
         df = (
-            self._df.select(pl.all().shuffle(seed=params["seed"]))
+            self._df.select(
+                pl.all().shuffle(
+                    seed=int(params["seed"]) if params["seed"] is not None else None
+                )
+            )
             if params["shuffle"]
             else self._df
         )
@@ -94,7 +108,7 @@ class TVTsplit:
             .drop("n")
         )
 
-    def tvt(self, params: dict[str, bool | float] = None) -> dict[str : pl.DataFrame]:
+    def tvt(self, params: dict[str, Any] | None = None) -> dict[str, pl.DataFrame]:
 
         if params is None:
             params = {"shuffle": True, "seed": 0, "val_size": 0.25, "test_size": 0.25}
